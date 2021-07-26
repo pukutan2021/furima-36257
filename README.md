@@ -30,7 +30,7 @@
 | prefecture_id          | integer    | null: false                    |
 | scheduled_delivery_id  | integer    | null: false                    |
 | price                  | integer    | null: false                    |
-| user_id                | references | foreign_key: true              |
+| user                   | references | foreign_key: true              |
 
 ### Association
 
@@ -39,10 +39,10 @@
 
 ## orders テーブル
 
-| Column  | Type       | Options           |
-| ------- | ---------- | ----------------- |
-| item_id | references | foreign_key: true |
-| user_id | references | foreign_key: true |
+| Column | Type       | Options           |
+| ------ | ---------- | ----------------- |
+| item   | references | foreign_key: true |
+| user   | references | foreign_key: true |
 
 ### Association
 
@@ -52,15 +52,15 @@
 
 ## pay_forms テーブル
 
-| Column        | Type       | Options                         |
-| ------------- | ---------- | ------------------------------- |
-| postal_code   | string     | null: false                     |
-| prefecture_id | integer    | null: false                     |
-| city          | string     | null: false                     |
-| addresses     | string     | null: false                     |
-| building      | string     |                                 |
-| phone_number  | string     | null: false                     |
-| order_id      | references | foreign_key: true |
+| Column        | Type       | Options           |
+| ------------- | ---------- | ----------------- |
+| postal_code   | string     | null: false       |
+| prefecture_id | integer    | null: false       |
+| city          | string     | null: false       |
+| addresses     | string     | null: false       |
+| building      | string     |                   |
+| phone_number  | string     | null: false       |
+| order         | references | foreign_key: true |
 
 ### Association
 
