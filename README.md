@@ -24,13 +24,13 @@
 | ---------------------- | ---------- | ------------------------------ |
 | name                   | string     | null: false                    |
 | info                   | text       | null: false                    |
-| category_id            | text       | null: false                    |
-| sales_status_id        | text       | null: false                    |
-| shipping_fee_status_id | text       | null: false                    |
+| category_id            | integer    | null: false                    |
+| sales_status_id        | integer    | null: false                    |
+| shipping_fee_status_id | integer    | null: false                    |
 | prefecture_id          | integer    | null: false                    |
-| scheduled_delivery_id  | string     | null: false                    |
+| scheduled_delivery_id  | integer    | null: false                    |
 | price                  | integer    | null: false                    |
-| user                   | references | null: false, foreign_key: true |
+| user_id                | references | foreign_key: true              |
 
 ### Association
 
@@ -39,10 +39,10 @@
 
 ## orders テーブル
 
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| item   | references | null: false, foreign_key: true |
-| user   | references | null: false, foreign_key: true |
+| Column  | Type       | Options           |
+| ------- | ---------- | ----------------- |
+| item_id | references | foreign_key: true |
+| user_id | references | foreign_key: true |
 
 ### Association
 
@@ -60,7 +60,7 @@
 | addresses     | string     | null: false                     |
 | building      | string     |                                 |
 | phone_number  | string     | null: false                     |
-| order         | references | null: false , foreign_key: true |
+| order_id      | references | foreign_key: true |
 
 ### Association
 
