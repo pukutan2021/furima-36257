@@ -76,7 +76,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include('Password is invalid')
     end
 
-    it 'パスワードは、英字のみのみでは登録できないこと' do
+    it 'パスワードは、英字のみでは登録できないこと' do
       @user.password = 'aaaaaa'
       @user.password_confirmation = 'aaaaaa'
       @user.valid?
