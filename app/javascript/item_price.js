@@ -1,4 +1,4 @@
-function count (){
+function input (){
   const priceInput = document.getElementById("item-price");
   priceInput.addEventListener("input", () => {
     const inputValue = priceInput.value;
@@ -10,4 +10,4 @@ function count (){
   });
 };
 
-window.addEventListener('load', count);
+window.addEventListener('load', input);
