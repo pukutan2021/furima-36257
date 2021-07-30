@@ -31,7 +31,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'emailは、＠を含む必要があること' do
-      @user.email = "testtest.com"
+      @user.email = 'testtest.com'
       @user.valid?
       expect(@user.errors.full_messages).to include('Email is invalid')
     end
@@ -52,14 +52,14 @@ RSpec.describe User, type: :model do
       @user.password = '123aa'
       @user.password_confirmation = '123aa'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+      expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
     end
 
     it 'passwordは半角英数字混合での入力が必須であること' do
       @user.password = '123456'
       @user.password_confirmation = '123456'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is invalid")
+      expect(@user.errors.full_messages).to include('Password is invalid')
     end
 
     it 'passwordとpassword_confirmationは、値の一致が必須であること' do
@@ -84,7 +84,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'お名前(全角)は、名字が必須であること' do
-      @user.last_name = '山田'      
+      @user.last_name = '山田'
       expect(@user).to be_valid
     end
 
@@ -108,17 +108,17 @@ RSpec.describe User, type: :model do
     it 'お名前(全角)は、全角(漢字、ひらがな、カタカナ)での入力が必須であること' do
       @user.last_name = 'yamada'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Last name is invalid")
+      expect(@user.errors.full_messages).to include('Last name is invalid')
     end
 
     it 'お名前(全角)は、全角(漢字、ひらがな、カタカナ)での入力が必須であること' do
       @user.first_name = 'tarou'
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name is invalid")
+      expect(@user.errors.full_messages).to include('First name is invalid')
     end
 
     it 'お名前カナ(全角)は、名字が必須であること' do
-      @user.last_name_kana = 'ヤマダ'     
+      @user.last_name_kana = 'ヤマダ'
       expect(@user).to be_valid
     end
 
