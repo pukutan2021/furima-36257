@@ -9,7 +9,7 @@ RSpec.describe Item, type: :model do
     describe '商品出品' do
       context '商品出品がうまくいくとき' do
         it '商品画像、商品名、商品の説明、カテゴリー、商品の状態、配送料の負担、
-            発送元の地域、発送までの日数、価格が存在すれば出品できる' do
+            発送元の地域、発送までの日数、価格、出品者が存在すれば出品できる' do
           expect(@item).to be_valid 
         end
       end
@@ -18,7 +18,7 @@ RSpec.describe Item, type: :model do
         it '商品画像を１枚つけることが必須である' do
           @item.image = nil
           @item.valid?
-          expect(@item.errors.full_messages).to include("Image must exist")
+          expect(@item.errors.full_messages).to include("Image can't be blank")
         end
 
         it '商品名が必須である' do
@@ -36,31 +36,31 @@ RSpec.describe Item, type: :model do
         it 'カテゴリーの情報が必須である' do
           @item.category_id = ''
           @item.valid?
-          expect(@item.errors.full_messages).to include("Category id can't be blank")
+          expect(@item.errors.full_messages).to include("Category can't be blank")
         end
 
         it '商品の状態の情報が必須である' do
           @item.sales_status_id = ''
           @item.valid?
-          expect(@item.errors.full_messages).to include("Sales status id can't be blank")
+          expect(@item.errors.full_messages).to include("Sales status can't be blank")
         end
 
         it '配送料の負担の情報が必須である' do
           @item.shipping_fee_status_id = ''
           @item.valid?
-          expect(@item.errors.full_messages)to include("Shipping fee status can't be blank")
+          expect(@item.errors.full_messages).to include("Shipping fee status can't be blank")
         end
 
         it '発送元の地域の情報が必須である' do
           @item.prefecture_id = ''
           @item.valid?
-          expect(@item.errors.full_messages).to include("Prefecture id can't be blank")
+          expect(@item.errors.full_messages).to include("Prefecture can't be blank")
         end
 
         it '発送までの日数の情報が必須である' do
-          @item.sheduled_delivery_id = ''
+          @item.scheduled_delivery_id = ''
           @item.valid?
-          expect(@item.errors.full_messages).to include("Scheduled delivery id can't be blank")
+          expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
         end
 
         it '価格の情報が必須である' do
