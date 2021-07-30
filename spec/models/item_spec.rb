@@ -118,13 +118,13 @@ RSpec.describe Item, type: :model do
         end
 
         it '価格は299円以下では登録できない' do
-          @item.price = '299'
+          @item.price = 299
           @item.valid?
           expect(@item.errors.full_messages).to include("Price is invalid")
         end
 
         it '価格は10,000,000円以上では登録できない' do
-          @item.price = '10000000'
+          @item.price = 10000000
           @item.valid?
           expect(@item.errors.full_messages).to include("Price is invalid")
         end
