@@ -39,8 +39,20 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include("Category can't be blank")
         end
 
+        it 'カテゴリーが未選択の場合は登録できない' do
+          @item.category_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Category can't be blank")
+        end
+
         it '商品の状態の情報が必須である' do
           @item.sales_status_id = ''
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Sales status can't be blank")
+        end
+
+        it '商品の状態が未選択の場合は登録できない' do
+          @item.sales_status_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Sales status can't be blank")
         end
@@ -51,8 +63,20 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include("Shipping fee status can't be blank")
         end
 
+        it '配送料の負担が未選択の場合は登録できない' do
+          @item.shipping_fee_status_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Shipping fee status can't be blank")
+        end
+
         it '発送元の地域の情報が必須である' do
           @item.prefecture_id = ''
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+        end
+
+        it '発送元の地域が未選択の場合は登録できない' do
+          @item.prefecture_id =1
           @item.valid?
           expect(@item.errors.full_messages).to include("Prefecture can't be blank")
         end
@@ -63,10 +87,46 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
         end
 
+        it '発送までの日数が未選択の場合は登録できない' do
+          @item.scheduled_delivery_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
+        end
+
         it '価格の情報が必須である' do
           @item.price = nil
           @item.valid?
           expect(@item.errors.full_messages).to include("Price can't be blank")
+        end
+
+        it '価格は全角文字では登録できない' do
+          @item.price = 'あああ'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is invalid")
+        end
+
+        it '価格は半角英数混合では登録できない' do
+          @item.price = '123aaa'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is invalid")
+        end
+
+        it '価格は半角英語だけでは登録できない' do
+          @item.price = 'aaaaa'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is invalid")
+        end
+
+        it '価格は299円以下では登録できない' do
+          @item.price = '299'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is invalid")
+        end
+
+        it '価格は10,000,000円以上では登録できない' do
+          @item.price = '10000000'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is invalid")
         end
 
         it 'userが紐付いていないと出品できない' do
