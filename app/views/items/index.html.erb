@@ -120,10 +120,10 @@
     <ul class='item-lists'>
       <% if @items.any? %> 
         <% @items.each do |item| %> 
-          <li class='list'> %>
+          <li class='list'> 
             <%= link_to item_path(item.id) do %> 
               <div class='item-img-content'> 
-                <%= image_tag "item-sample.png", class: "item-img" %> 
+                <%= image_tag item.image, class: "item-img" %> 
                 <%# 商品が売れていればsold outを表示しましょう  %>
                 <%# <div class='sold-out'>  %>
                 <%# < span>Sold Out!!</span>  %>
@@ -135,7 +135,7 @@
                   <%= item.name %> 
                 </h3> 
                 <div class='item-price'> 
-                  <span><%= item.price %>円<br><%= item.shipping_fee_status_id %></span> 
+                  <span><%= item.price %>円<br><%= item.shipping_fee_status.name %></span> 
                   <div class='star-btn'> 
                     <%= image_tag "star.png", class:"star-icon" %> 
                     <span class='star-count'>0</span> 
