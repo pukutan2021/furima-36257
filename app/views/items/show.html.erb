@@ -41,7 +41,7 @@
         <tbody>
           <tr>
             <th class="detail-item">出品者</th>
-            <td class="detail-value"><%= @item.user.name %></td>
+            <td class="detail-value"><%= @item.user.nickname %></td>
           </tr>
           <tr>
             <th class="detail-item">カテゴリー</th>
@@ -61,7 +61,7 @@
           </tr>
           <tr>
             <th class="detail-item">発送日の目安</th>
-            <td class="detail-value"><%= scheduled_delivery.name %></td>
+            <td class="detail-value"><%= @item.scheduled_delivery.name %></td>
           </tr>
         </tbody>
       </table>
