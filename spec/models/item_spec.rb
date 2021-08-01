@@ -10,7 +10,7 @@ RSpec.describe Item, type: :model do
       context '商品出品がうまくいくとき' do
         it '商品画像、商品名、商品の説明、カテゴリー、商品の状態、配送料の負担、
             発送元の地域、発送までの日数、価格、出品者が存在すれば出品できる' do
-          expect(@item).to be_valid 
+          expect(@item).to be_valid
         end
       end
 
@@ -76,7 +76,7 @@ RSpec.describe Item, type: :model do
         end
 
         it '発送元の地域が未選択の場合は登録できない' do
-          @item.prefecture_id =1
+          @item.prefecture_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Prefecture can't be blank")
         end
@@ -102,31 +102,31 @@ RSpec.describe Item, type: :model do
         it '価格は全角文字では登録できない' do
           @item.price = 'あああ'
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is invalid")
+          expect(@item.errors.full_messages).to include('Price is invalid')
         end
 
         it '価格は半角英数混合では登録できない' do
           @item.price = '123aaa'
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is invalid")
+          expect(@item.errors.full_messages).to include('Price is invalid')
         end
 
         it '価格は半角英語だけでは登録できない' do
           @item.price = 'aaaaa'
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is invalid")
+          expect(@item.errors.full_messages).to include('Price is invalid')
         end
 
         it '価格は299円以下では登録できない' do
           @item.price = 299
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is invalid")
+          expect(@item.errors.full_messages).to include('Price is invalid')
         end
 
         it '価格は10,000,000円以上では登録できない' do
-          @item.price = 10000000
+          @item.price = 10_000_000
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is invalid")
+          expect(@item.errors.full_messages).to include('Price is invalid')
         end
 
         it 'userが紐付いていないと出品できない' do
@@ -134,7 +134,6 @@ RSpec.describe Item, type: :model do
           @item.valid?
           expect(@item.errors.full_messages).to include('User must exist')
         end
-
       end
     end
   end
