@@ -50,7 +50,7 @@
 - belongs_to :item
 - has_one :pay_form
 
-## pay_forms テーブル
+## transactions テーブル
 
 | Column        | Type       | Options           |
 | ------------- | ---------- | ----------------- |
