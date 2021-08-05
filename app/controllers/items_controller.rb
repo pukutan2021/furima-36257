@@ -27,6 +27,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @order_transaction = OrderTransaction.new(params[:item_id])
+    if @item.id == @order_transaction.item_id 
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   def update
