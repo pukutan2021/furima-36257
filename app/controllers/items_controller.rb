@@ -27,8 +27,7 @@ class ItemsController < ApplicationController
 
   def edit
     @order_transaction = OrderTransaction.new(params[:item_id])
-    if @item.order.present? 
-      redirect_to root_path
+    contributor_confirmation
     end
   end
 
@@ -61,6 +60,6 @@ class ItemsController < ApplicationController
   end
 
   def contributor_confirmation
-    redirect_to root_path unless current_user == @item.user
+    redirect_to root_path if current_user != @item.user || @item.order.present?
   end
 end

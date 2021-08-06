@@ -1,17 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
   before_action :order_confirmation, only: [:index, :create]
 
   def index
-    @order_transaction = OrderTransaction.new
-    @item = Item.find(params[:item_id])
-    order_confirmation
+    @order_transaction = OrderTransaction.new    
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_transaction = OrderTransaction.new(order_params)
-    order_confirmation
     if @order_transaction.valid?
       pay_item
       @order_transaction.save
@@ -26,6 +23,10 @@ class OrdersController < ApplicationController
     params.require(:order_transaction).permit(:postal_code, :prefecture_id, 
       :city, :addresses,:building, :phone_number).merge(user_id: 
         current_user.id, item_id: params[:item_id], token: params[:token])
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
   def pay_item
