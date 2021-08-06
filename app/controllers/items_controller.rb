@@ -22,7 +22,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
     @order_transaction = OrderTransaction.new(params[:item_id])
   end
 
@@ -34,7 +33,11 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
+    @order_transaction = OrderTransaction.new(params[:item_id])
+    if @item.order.present?
+      redirect_to root_path
+    elsif
+      @item.update(item_params)
       redirect_to item_path(@item)
     else
       render :edit

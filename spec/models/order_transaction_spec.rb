@@ -21,6 +21,18 @@ RSpec.describe OrderTransaction, type: :model do
       end
 
       context '内容に問題がある場合' do
+        it 'user情報が必須であること' do
+          @order_transaction.user_id = ''
+          @order_transaction.valid?
+          expect(@order_transaction.errors.full_messages). to include("User can't be blank")
+        end
+
+        it 'item情報が必須であること' do
+          @order_transaction.item_id = ''
+          @order_transaction.valid?
+          expect(@order_transaction.errors.full_messages).to include("Item can't be blank")
+        end
+
         it '郵便番号が必須であること' do
           @order_transaction.postal_code = ''
           @order_transaction.valid?
@@ -59,6 +71,24 @@ RSpec.describe OrderTransaction, type: :model do
 
         it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと' do
           @order_transaction.phone_number = '090-1234-5678'
+          @order_transaction.valid?
+          expect(@order_transaction.errors.full_messages).to include('Phone number is invalid')
+        end
+
+        it '電話番号は9桁以下だと登録できないこと' do
+          @order_transaction.phone_number = '090-1234-56'
+          @order_transaction.valid?
+          expect(@order_transaction.errors.full_messages).to include('Phone number is invalid')
+        end
+
+        it '電話番号は12桁以上だと登録できないこと' do
+          @order_transaction.phone_number = '090-1234-56789'
+          @order_transaction.valid?
+          expect(@order_transaction.errors.full_messages).to include('Phone number is invalid')
+        end
+
+        it '電話番号は半角英字だと登録できないこと' do
+          @order_transaction.phone_number = '090-aaaa-aaaa'
           @order_transaction.valid?
           expect(@order_transaction.errors.full_messages).to include('Phone number is invalid')
         end
