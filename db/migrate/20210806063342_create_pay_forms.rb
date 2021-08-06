@@ -1,6 +1,6 @@
-class CreateTransactions < ActiveRecord::Migration[6.0]
+class CreatePayForms < ActiveRecord::Migration[6.0]
   def change
-    create_table :transactions do |t|
+    create_table :pay_forms do |t|
       t.string :postal_code, null: false
       t.integer :prefecture_id, null: false
       t.string :city, null: false

@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :set_item, only: [:edit, :update, :destroy, :show]
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
 
@@ -28,10 +28,8 @@ class ItemsController < ApplicationController
 
   def edit
     @order_transaction = OrderTransaction.new(params[:item_id])
-    if @item.id == @order_transaction.item_id 
+    if @item.order.present? 
       redirect_to root_path
-    else
-      render :edit
     end
   end
 

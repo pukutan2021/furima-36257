@@ -48,9 +48,9 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :transaction
+- has_one :pay_form
 
-## transactions テーブル
+## pay_forms テーブル
 
 | Column        | Type       | Options           |
 | ------------- | ---------- | ----------------- |

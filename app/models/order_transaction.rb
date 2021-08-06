@@ -1,7 +1,7 @@
 class OrderTransaction
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, 
-    :city, :addresses, :building, :phone_number
+    :city, :addresses, :building, :phone_number, :token
 
   with_options presence: true do
     validates :user_id
@@ -11,11 +11,12 @@ class OrderTransaction
     validates :city
     validates :addresses
     validates :phone_number, format: {with: /\A[0-9]{10,11}\z/i, message: "is invalid"}
+    validates :token
   end
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
-    Transaction.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, 
+    PayForm.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, 
       addresses: addresses, building: building, phone_number: phone_number, order_id: order.id)
   end
 end
