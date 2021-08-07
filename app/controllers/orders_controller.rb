@@ -41,6 +41,7 @@ class OrdersController < ApplicationController
   def order_confirmation
     if current_user == @item.user || @item.order.present?
       redirect_to root_path
+    end
   end
 
 end
