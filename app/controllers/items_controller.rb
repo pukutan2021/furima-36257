@@ -27,16 +27,11 @@ class ItemsController < ApplicationController
 
   def edit
     @order_transaction = OrderTransaction.new(params[:item_id])
-    contributor_confirmation
-    end
   end
 
   def update
     @order_transaction = OrderTransaction.new(params[:item_id])
-    if @item.order.present?
-      redirect_to root_path
-    elsif
-      @item.update(item_params)
+    if @item.update(item_params)
       redirect_to item_path(@item)
     else
       render :edit
@@ -60,6 +55,8 @@ class ItemsController < ApplicationController
   end
 
   def contributor_confirmation
-    redirect_to root_path if current_user != @item.user || @item.order.present?
+    if current_user != @item.user || @item.order.present?
+      redirect_to root_path 
+    end
   end
 end
